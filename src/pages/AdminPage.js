@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
 import { Typography, Button, Box, Link } from '@mui/material';
 import customTheme from '../customTheme';
 import AppointmentsTable from '../components/AppointmentsTable';
@@ -8,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 const AdminPage = () => {
   const [appointments, setAppointments] = useState([]);
-  const [emailInquiries, setEmailInquiries] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false); // Assume user is not logged in initially
   const navigate = useNavigate();
 
@@ -90,7 +88,7 @@ const AdminPage = () => {
       <Typography variant="h5" gutterBottom sx={{ ...customTheme.typography.h5, textAlign: 'center', paddingTop: customTheme.spacing(2) }}>
         Email Inquiries
       </Typography>
-      <EmailInquiriesTable emailInquiries={emailInquiries} />
+      <EmailInquiriesTable />
     </div>
   );
 };

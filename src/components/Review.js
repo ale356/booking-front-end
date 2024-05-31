@@ -6,36 +6,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
-const packages = [
-  {
-    name: 'Wash Package',
-    desc: '',
-    price: '$70',
-  },
-  {
-    name: 'Shine Package',
-    desc: '',
-    price: '$110',
-  },
-  {
-    name: 'Premium Package',
-    desc: '',
-    price: '$330',
-  }
-];
-
 export default function Review() {
-  const { appointmentData, personalData, paymentData } = useContext(AppointmentContext);
-
-  // Check the appointment value to decide the representation.
-  const appointmentPackage = appointmentData.typeOfService
-  let indexPackage = 0
-
-  if (appointmentPackage === 'shine-package') {
-    indexPackage = 1
-  } else if (appointmentPackage === 'premium-package') {
-    indexPackage = 2
-  }
+  const { appointmentData, personalData } = useContext(AppointmentContext);
 
   return (
     <React.Fragment>
