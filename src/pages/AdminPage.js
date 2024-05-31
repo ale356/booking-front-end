@@ -83,10 +83,6 @@ const AdminPage = () => {
         Appointments
       </Typography>
       <AppointmentsTable appointments={appointments} />
-
-      <Typography variant="h5" gutterBottom sx={{ ...customTheme.typography.h5, textAlign: 'center', paddingTop: customTheme.spacing(2) }}>
-        Email Inquiries
-      </Typography>
     </div>
   );
 };
