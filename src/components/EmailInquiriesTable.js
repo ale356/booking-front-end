@@ -11,7 +11,7 @@ const BoldTableCell = styled(TableCell)({
   fontWeight: 'bold',
 });
 
-const EmailInquiriesTable = ({ emailInquiries }) => {
+const EmailInquiriesTable = () => {
   return (
     <TableContainer component={Paper}>
       <StyledTable aria-label="email inquiries table">
@@ -24,19 +24,6 @@ const EmailInquiriesTable = ({ emailInquiries }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {emailInquiries.map((inquiry) => (
-            <TableRow key={inquiry.id}>
-              <TableCell component="th" scope="row">
-                {inquiry.id}
-              </TableCell>
-              <TableCell align="right">{inquiry.senderEmail}</TableCell>
-              <TableCell align="right">{inquiry.message}</TableCell>
-              <TableCell align="right">
-                <Link to={`/reply-email/${inquiry.id}`}>Reply</Link> |{' '}
-                <Link to={`/delete-email/${inquiry.id}`}>Delete</Link>
-              </TableCell>
-            </TableRow>
-          ))}
         </TableBody>
       </StyledTable>
     </TableContainer>
