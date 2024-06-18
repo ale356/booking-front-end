@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Box, Typography } from '@mui/material';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 const StyledTable = styled(Table)({
@@ -138,10 +137,6 @@ const ServicesTable = () => {
       </TableContainer>
     </div>
   );
-};
-
-ServicesTable.propTypes = {
-  services: PropTypes.array.isRequired,
 };
 
 export default ServicesTable;

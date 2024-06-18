@@ -13,8 +13,6 @@ import ContactRequestsTable from '../components/ContactRequestsTable';
  * @returns {JSX.Element} The admin page component.
  */
 const AdminPage = () => {
-  const [appointments, setAppointments] = useState([]);
-  const [services, setServices] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [visibleTable, setVisibleTable] = useState('appointments');
   const navigate = useNavigate();
@@ -22,111 +20,16 @@ const AdminPage = () => {
   // Load the initial visible table from localStorage.
   useEffect(() => {
     const savedVisibleTable = localStorage.getItem('visibleTable');
+    const token = localStorage.getItem('accessToken');
     if (savedVisibleTable) {
       setVisibleTable(savedVisibleTable);
     }
-  }, []);
 
-  /**
-   * Fetches the service name for a given service ID.
-   *
-   * @param {string} serviceId - The ID of the service to fetch the name for.
-   * @returns {Promise<string>} The name of the service.
-   */
-  const fetchServiceName = async (serviceId) => {
-    const token = localStorage.getItem('accessToken');
-    try {
-      const response = await fetch(`https://onedv613-restful-api.onrender.com/api/v1/services/${serviceId}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      return data.name;
-    } catch (error) {
-      console.error('Error fetching service name:', error);
-      return 'Unknown Service';
+    if (token) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
     }
-  };
-
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      const token = localStorage.getItem('accessToken');
-      if (token) {
-        try {
-          const response = await fetch('https://onedv613-restful-api.onrender.com/api/v1/appointments', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-          });
-
-          if (!response.ok) {
-            if (response.status === 401 || response.status === 403) {
-              setLoggedIn(false);
-            }
-            throw new Error('Network response was not ok');
-          }
-
-          const appointmentData = await response.json();
-
-          const appointmentsWithServiceNames = await Promise.all(appointmentData.map(async (appointment) => {
-            const serviceName = await fetchServiceName(appointment.serviceId);
-            return {
-              ...appointment,
-              serviceName,
-            };
-          }));
-          setAppointments(appointmentsWithServiceNames);
-          setLoggedIn(true);
-        } catch (error) {
-          console.error('Error fetching appointments:', error);
-        }
-      } else {
-        setLoggedIn(false);
-      }
-    };
-
-    fetchAppointments();
-  }, []);
-
-  useEffect(() => {
-    const fetchServices = async () => {
-      const token = localStorage.getItem('accessToken');
-      if (token) {
-        try {
-          const response = await fetch('https://onedv613-restful-api.onrender.com/api/v1/services', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-          });
-
-          if (!response.ok) {
-            if (response.status === 401 || response.status === 403) {
-              setLoggedIn(false);
-            }
-            throw new Error('Network response was not ok');
-          }
-
-          const serviceData = await response.json();
-          setServices(serviceData);
-        } catch (error) {
-          console.error('Error fetching services:', error);
-        }
-      } else {
-        setLoggedIn(false);
-      }
-    };
-
-    fetchServices();
   }, []);
 
   /**
@@ -212,7 +115,7 @@ const AdminPage = () => {
           <Typography variant="h5" gutterBottom sx={{ ...customTheme.typography.h5, textAlign: 'center', paddingTop: customTheme.spacing(2) }}>
             Services
           </Typography>
-          <ServicesTable services={services} />
+          <ServicesTable />
         </>
       )}
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Button } from '@mui/material';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 const StyledTable = styled(Table)({
@@ -20,37 +19,79 @@ const BoldTableCell = styled(TableCell)({
 const AppointmentsTable = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [appointmentData, setAppointmentData] = useState([]);
+  const [appointments, setAppointments] = useState([]);
   const navigate = useNavigate();
+
+  /**
+   * Fetches the service name for a given service ID.
+   *
+   * @param {string} serviceId - The ID of the service to fetch the name for.
+   * @returns {Promise<string>} The name of the service.
+   */
+  const fetchServiceName = async (serviceId) => {
+    const token = localStorage.getItem('accessToken');
+    try {
+      const response = await fetch(`https://onedv613-restful-api.onrender.com/api/v1/services/${serviceId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data.name;
+    } catch (error) {
+      console.error('Error fetching service name:', error);
+      return 'Unknown Service';
+    }
+  };
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      const accessToken = localStorage.getItem('accessToken');
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        try {
+          const response = await fetch('https://onedv613-restful-api.onrender.com/api/v1/appointments', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
 
-      try {
-        const response = await fetch('https://onedv613-restful-api.onrender.com/api/v1/appointments', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
-          },
-        });
+          if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+              navigate("/login")
+            }
+            throw new Error('Network response was not ok');
+          }
 
-        if (response.status === 200) {
-          const data = await response.json();
-          setAppointmentData(data);
-        } else {
-          throw new Error('Failed to fetch appointments');
+          const appointmentData = await response.json();
+
+          const appointmentsWithServiceNames = await Promise.all(appointmentData.map(async (appointment) => {
+            const serviceName = await fetchServiceName(appointment.serviceId);
+            return {
+              ...appointment,
+              serviceName,
+            };
+          }));
+          setAppointments(appointmentsWithServiceNames);
+        } catch (error) {
+          console.error('Error fetching appointments:', error);
+          setError('Error fetching appointments');
+        } finally {
+          setLoading(false)
         }
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
+      } else {
+        navigate("/login")
       }
     };
 
     fetchAppointments();
-  }, []);
+  }, [navigate]);
 
   const handleEditClick = (appointment) => {
     navigate(`/editAppointment/${appointment.id}`);
@@ -68,7 +109,7 @@ const AppointmentsTable = () => {
     return <Typography variant="h6" align="center" color="error">Error: {error}</Typography>;
   }
 
-  if (appointmentData.length === 0) {
+  if (appointments.length === 0) {
     return <Typography variant="h6" align="center">No appointments found</Typography>;
   }
 
@@ -89,7 +130,7 @@ const AppointmentsTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {appointmentData.map((appointment) => (
+          {appointments.map((appointment) => (
             <TableRow key={appointment.id}>
               <TableCell component="th" scope="row">
                 {appointment.id}
@@ -116,10 +157,6 @@ const AppointmentsTable = () => {
       </StyledTable>
     </TableContainer>
   );
-};
-
-AppointmentsTable.propTypes = {
-  appointments: PropTypes.array.isRequired,
 };
 
 export default AppointmentsTable;
