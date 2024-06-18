@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import customTheme from '../customTheme'
+import customTheme from '../functions/customTheme'
 
 /**
  * A H4 title React component.

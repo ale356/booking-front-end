@@ -9,13 +9,24 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
-import customTheme from '../customTheme';
+import customTheme from '../functions/customTheme';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Represents the SignIn component for user authentication.
+ *
+ * @component
+ * @returns {JSX.Element} The JSX element representing the Sign In form.
+ */
 export default function SignIn() {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
+  /**
+   * Handles form submission for user login.
+   *
+   * @param {Event} event - The form submission event.
+   */
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -28,6 +39,12 @@ export default function SignIn() {
     postData('https://onedv613-restful-api.onrender.com/api/v1/login', data);
   };
 
+  /**
+   * Sends a POST request to submit user login data.
+   *
+   * @param {string} url - The URL to send the POST request to.
+   * @param {object} data - The data to include in the POST request body.
+   */
   const postData = async (url, data) => {
     try {
       const response = await fetch(url, {
@@ -42,10 +59,9 @@ export default function SignIn() {
       }
       const responseData = await response.json();
 
-      // Save the access token in local storage
+      // Save the access token in local storage.
       localStorage.setItem('accessToken', responseData.access_token);
 
-      // Redirect to the /admin page
       navigate('/admin');
     } catch (error) {
       console.error('There was a problem with the login request:', error);
@@ -68,7 +84,7 @@ export default function SignIn() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h4">
             Log In
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -81,6 +97,7 @@ export default function SignIn() {
               name="username"
               autoComplete="username"
               autoFocus
+              inputProps={{ 'data-testid': 'username' }}
             />
             <TextField
               margin="normal"
@@ -91,6 +108,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              inputProps={{ 'data-testid': 'password' }}
             />
             {errorMessage && (
               <Typography color="error" variant="body2" align="center">

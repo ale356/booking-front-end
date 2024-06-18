@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Typography } from '@mui/material';
-import { Container } from '@mui/material';
-import { Grid } from '@mui/material';
-import { Card } from '@mui/material';
-import { CardActionArea } from '@mui/material';
-import { CardContent } from '@mui/material';
-import { Alert } from '@mui/material';
-import customTheme from '../customTheme';
+import { Typography, Container, Grid, Card, CardActionArea, CardContent, Alert } from '@mui/material';
+import customTheme from '../functions/customTheme';
 
 /**
- * A service React component.
+ * Fetches and displays a list of services.
  *
- * @returns {Component} a component.
+ * @returns {JSX.Element} Component rendering a list of services.
  */
 function ServiceContainer() {
   const [services, setServices] = useState([]);

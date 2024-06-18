@@ -1,11 +1,15 @@
-import React from 'react'
-import About from '../components/About'
+import React from 'react';
+import About from '../components/About';
 
-const AppointmentsPage = () => {
+/**
+ * Renders the About Us page.
+ *
+ * @returns {JSX.Element} The About Us page component.
+ */
+const AboutUsPage = () => {
   return (
-    <About>
-    </About>
-  )
+    <About />
+  );
 }
 
-export default AppointmentsPage
+export default AboutUsPage;

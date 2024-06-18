@@ -15,6 +15,12 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import H4Title from '../components/H4Title';
 
+/**
+ * Renders a FAQ page component displaying questions and answers.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered FAQ page component.
+ */
 const FaqPage = () => {
   const faqData = [
     {
@@ -33,6 +39,11 @@ const FaqPage = () => {
 
   const [open, setOpen] = React.useState({});
 
+  /**
+   * Handles toggling the visibility of the answer for a specific question.
+   *
+   * @param {number} index - The index of the question in the faqData array.
+   */
   const handleRowClick = (index) => {
     setOpen((prevOpen) => {
       return { ...prevOpen, [index]: !prevOpen[index] };
@@ -43,7 +54,7 @@ const FaqPage = () => {
     <main>
       <Box sx={{ bgcolor: 'background.paper', pt: 3 }}>
         <Container maxWidth="sm">
-          <H4Title text="FAQ"></H4Title>
+          <H4Title text="FAQ" />
           <Typography variant="body1" align="center" color="text.secondary" paragraph>
             Welcome to our FAQ page. Here you can find answers to some common questions about HealthPlus Clinic's medical services.
           </Typography>

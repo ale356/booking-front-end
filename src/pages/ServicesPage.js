@@ -1,9 +1,15 @@
-import React from 'react'
-import customTheme from '../customTheme'
-import ServiceContainer from '../components/ServiceContainer'
-import { Typography } from '@mui/material'
-import { Container } from '@mui/material'
+import React from 'react';
+import customTheme from '../functions/customTheme';
+import ServiceContainer from '../components/ServiceContainer';
+import { Typography } from '@mui/material';
+import { Container } from '@mui/material';
 
+/**
+ * Represents the ServicesPage component, displaying a list of services.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered ServicesPage component.
+ */
 const ServicesPage = () => {
 
   return (
@@ -19,13 +25,13 @@ const ServicesPage = () => {
           justifyContent: "center"
         }}>
           Our Services
-          </Typography>
+        </Typography>
 
-          <ServiceContainer/>
+        <ServiceContainer />
 
-    </Container >
-  </div >
-  )
-}
+      </Container>
+    </div>
+  );
+};
 
-export default ServicesPage
+export default ServicesPage;

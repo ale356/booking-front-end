@@ -15,42 +15,61 @@ import AddressForm from './AddressForm';
 import AppointmentForm from './AppointmentForm';
 import Review from './Review';
 
+// Define the steps of the appointment process.
 const steps = ['Choose Appointment', 'Personal Details', 'Review Your Appointment'];
 
+// Create a MUI theme for the component.
 const theme = createTheme();
 
+/**
+ * Represents the Appointment component, which guides the user through
+ * the appointment booking process.
+ *
+ * @component
+ * @returns {JSX.Element}
+ */
 export default function Appointment() {
   const [activeStep, setActiveStep] = React.useState(0);
 
-  // Data objects.
+  // Retrieve data from the AppointmentContext.
   const { appointmentData, personalData } = useContext(AppointmentContext);
 
+  /**
+   * Advances to the next step in the appointment process.
+   */
   const handleNext = () => {
+    // If on the last step, initiate a POST request to submit the appointment.
     if (activeStep === steps.length - 1) {
       const url = 'https://onedv613-restful-api.onrender.com/api/v1/appointments';
 
       const data = {
-        // Include the necessary data here for the POST request
-        serviceId: appointmentData.serviceId, // Assuming appointmentData has serviceId
+        serviceId: appointmentData.serviceId,
         time: appointmentData.dateTime.toISOString(),
         firstName: personalData.firstName,
         lastName: personalData.lastName,
         mobileNumber: personalData.mobileNumber,
         email: personalData.email,
-        // Include other fields as needed
       };
-      console.log(data)
 
       postData(url, data);
     }
+
     setActiveStep(activeStep + 1);
   };
 
-
+  /**
+   * Moves back to the previous step in the appointment process.
+   */
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
 
+  /**
+   * Sends a POST request to submit appointment data to the server.
+   *
+   * @param {string} url - The URL to send the POST request to.
+   * @param {object} data - The data to include in the POST request body.
+   */
   const postData = async (url, data) => {
     try {
       const response = await fetch(url, {
@@ -64,14 +83,20 @@ export default function Appointment() {
         throw new Error('Network response was not ok');
       }
       const responseData = await response.json();
-      // Handle the response data
-      console.log(responseData); // Log or handle the response data as needed
+      // Handle the response data as needed.
+      console.log(responseData);
     } catch (error) {
-      // Handle any errors.
       console.error('Error:', error.message);
     }
   };
 
+  /**
+   * Renders the content of the current step in the appointment process.
+   *
+   * @param {number} step - The current step index.
+   * @returns {JSX.Element} The component corresponding to the current step.
+   * @throws {Error} Throws an error if the step index is unknown.
+   */
   function getStepContent(step) {
     switch (step) {
       case 0:

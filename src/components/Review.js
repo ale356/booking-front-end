@@ -6,6 +6,12 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
+/**
+ * Represents the Review component, displaying a summary of appointment details.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Review component.
+ */
 export default function Review() {
   const { appointmentData, personalData } = useContext(AppointmentContext);
 
@@ -65,11 +71,9 @@ export default function Review() {
                 {appointmentData.price}
               </Typography>
             </ListItem>
-
           </List>
         </Grid>
       </Grid>
-
     </React.Fragment>
   );
 }

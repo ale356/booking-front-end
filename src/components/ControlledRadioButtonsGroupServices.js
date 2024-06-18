@@ -6,6 +6,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
+/**
+ * Represents a controlled radio buttons group for selecting a type of service.
+ *
+ * @component
+ * @returns {JSX.Element} The component for selecting a type of service.
+ */
 export default function ControlledRadioButtonsGroup() {
   const { appointmentData, setAppointmentData } = useContext(AppointmentContext);
   const [services, setServices] = useState([]);
@@ -24,18 +30,22 @@ export default function ControlledRadioButtonsGroup() {
     fetchServices();
   }, []);
 
+  /**
+   * Handles change in the selected type of service.
+   *
+   * @param {Object} event - The event object representing the change.
+   */
   const handleChange = (event) => {
     const { value } = event.target;
   
-    // Find the service object corresponding to the selected service name
+    // Find the service object corresponding to the selected service name.
     const selectedService = services.find(service => service.name === value);
   
-    // Extract the service ID from the selected service object
+    // Extract the service ID from the selected service object.
     const selectedServiceId = selectedService ? selectedService.id : null;
   
     setAppointmentData({ ...appointmentData, typeOfService: value, serviceId: selectedServiceId });
   };
-  
 
   return (
     <FormControl>

@@ -7,8 +7,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import customTheme from '../customTheme';
+import customTheme from '../functions/customTheme';
 
+// Define images array for the carousel.
 const images = [
   {
     label: 'Compassionate care at HealthPlus Clinic.',
@@ -24,23 +25,35 @@ const images = [
   }
 ];
 
+/**
+ * Renders a swipeable image carousel with navigation controls.
+ *
+ * @component
+ * @returns {JSX.Element}
+ */
 function SwipeableTextMobileStepper() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = images.length;
 
+  /**
+   * Advances to the next image in the carousel.
+   */
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
+  /**
+   * Moves to the previous image in the carousel.
+   */
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   return (
     <Box sx={{
-      display:'flex',
-      justifyContent:"center",
+      display: 'flex',
+      justifyContent: 'center',
     }}>
       <Box sx={{ maxWidth: 700, flexGrow: 1 }}>
         <Paper

@@ -4,9 +4,20 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { AppointmentContext } from '../contexts/AppointmentContext';
 
+/**
+ * AddressForm component for collecting personal details of the user.
+ *
+ * @component
+ * @returns {JSX.Element} A form for entering personal details.
+ */
 export default function AddressForm() {
   const { personalData, setPersonalData } = useContext(AppointmentContext);
 
+  /**
+   * Handles changes to the form fields and updates the personalData state.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} event - The change event from the form field.
+   */
   const handleChange = (event) => {
     const { name, value } = event.target;
     setPersonalData((prevData) => ({

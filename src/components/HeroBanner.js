@@ -1,6 +1,6 @@
 import { Box } from '@mui/system'
 import React from 'react'
-import customTheme from '../customTheme'
+import customTheme from '../functions/customTheme'
 
 /**
  * A hero banner React component.

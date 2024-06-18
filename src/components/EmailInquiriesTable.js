@@ -1,7 +1,6 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { Link } from 'react-router-dom';
 
 const StyledTable = styled(Table)({
   minWidth: 650,
@@ -11,6 +10,12 @@ const BoldTableCell = styled(TableCell)({
   fontWeight: 'bold',
 });
 
+/**
+ * Renders a table displaying email inquiries.
+ *
+ * @component
+ * @returns {JSX.Element} TableContainer component wrapped in Paper.
+ */
 const EmailInquiriesTable = () => {
   return (
     <TableContainer component={Paper}>
@@ -24,6 +29,7 @@ const EmailInquiriesTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
+          {/* Table rows will be dynamically populated */}
         </TableBody>
       </StyledTable>
     </TableContainer>

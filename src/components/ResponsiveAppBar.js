@@ -14,16 +14,30 @@ import Avatar from '@mui/material/Avatar';
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link as RouterLink } from 'react-router-dom';
 
+// Define the names and routes of the pages.
 const pagesName = ['Services', 'Make An Appointment', 'About', 'Contact', 'FAQ'];
 const pagesRouting = ['/services', '/appointment', '/about', '/contact', '/faq'];
 
+/**
+ * ResponsiveAppBar component renders a responsive navigation bar with menu options.
+ *
+ * @component
+ */
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
+  /**
+   * Handles opening the navigation menu.
+   *
+   * @param {Event} event - The event that triggered the menu opening.
+   */
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
 
+  /**
+   * Handles closing the navigation menu.
+   */
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -83,9 +97,9 @@ const ResponsiveAppBar = () => {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
-
             </Menu>
           </Box>
+
           <Typography
             component={RouterLink}
             to={'/'}
@@ -99,6 +113,7 @@ const ResponsiveAppBar = () => {
           >
             HealthPlus Clinic
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pagesName.map((page, index) => (
               <Button
@@ -112,7 +127,6 @@ const ResponsiveAppBar = () => {
                 {page}
               </Button>
             ))}
-
           </Box>
 
           {/* Invisible Avatar and Menu */}

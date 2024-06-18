@@ -8,9 +8,20 @@ import Typography from '@mui/material/Typography';
 import ControlledRadioButtonsGroupServices from './ControlledRadioButtonsGroupServices';
 import { AppointmentContext } from '../contexts/AppointmentContext';
 
+/**
+ * Renders the AppointmentForm component for selecting appointment details.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered JSX element of the AppointmentForm component.
+ */
 const AppointmentForm = () => {
   const { appointmentData, setAppointmentData } = useContext(AppointmentContext);
 
+  /**
+   * Handles the change in date and time selection.
+   *
+   * @param {Date} newDateTime - The new date and time selected.
+   */
   const handleDateTimeChange = (newDateTime) => {
     setAppointmentData({ ...appointmentData, dateTime: newDateTime.toDate() });
   };
