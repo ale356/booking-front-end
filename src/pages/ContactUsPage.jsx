@@ -83,7 +83,7 @@ function ContactUsPage() {
         <Container maxWidth="sm">
           <H4Title text="Contact Us" />
           <Typography variant="body1" align="center" color="text.secondary" paragraph>
-            For any inquiries or appointments, 
+            For any inquiries or appointments,
             please feel free to contact us using the information below:
             <br />
             Email: info@healthplusclinic.com
@@ -92,7 +92,7 @@ function ContactUsPage() {
             <br />
             Address: 123 Medical Boulevard, City, State, 12345
             <br />
-            Opening Hours: Monday-Friday: 8:00 AM - 6:00 PM, 
+            Opening Hours: Monday-Friday: 8:00 AM - 6:00 PM,
             Saturday: 9:00 AM - 3:00 PM, Sunday: Closed
           </Typography>
           {error && <Alert severity="error">{error}</Alert>}
