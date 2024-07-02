@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-no-constructed-context-values */
 import React, { createContext, useContext, useReducer } from 'react';
 import customTheme from '../functions/customTheme';
 

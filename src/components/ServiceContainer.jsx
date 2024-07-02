@@ -22,7 +22,7 @@ function ServiceContainer() {
         }
         const data = await response.json();
         setServices(data);
-      } catch (error) {
+      } catch (useEffectError) {
         setError('Failed to fetch services.');
       }
     };

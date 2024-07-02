@@ -41,6 +41,7 @@ function AppointmentForm() {
               label="Select Date and Time"
               value={appointmentData.dateTime ? new Date(appointmentData.dateTime) : null}
               onChange={handleDateTimeChange}
+              /* eslint-disable react/jsx-props-no-spreading */
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>

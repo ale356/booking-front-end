@@ -43,8 +43,8 @@ function ServicesTable() {
         } else {
           throw new Error('Failed to fetch services');
         }
-      } catch (error) {
-        setError(error.message);
+      } catch (useEffectError) {
+        setError(useEffectError.message);
       } finally {
         setLoading(false);
       }

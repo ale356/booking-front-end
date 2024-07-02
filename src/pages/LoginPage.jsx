@@ -23,28 +23,11 @@ export default function SignIn() {
   const navigate = useNavigate();
 
   /**
-   * Handles form submission for user login.
-   *
-   * @param {Event} event - The form submission event.
-   */
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const data = {
-      username: formData.get('username'),
-      password: formData.get('password'),
-    };
-
-    // Post the data to the server.
-    postData('https://onedv613-restful-api.onrender.com/api/v1/login', data);
-  };
-
-  /**
-   * Sends a POST request to submit user login data.
-   *
-   * @param {string} url - The URL to send the POST request to.
-   * @param {object} data - The data to include in the POST request body.
-   */
+ * Sends a POST request to submit user login data.
+ *
+ * @param {string} url - The URL to send the POST request to.
+ * @param {object} data - The data to include in the POST request body.
+ */
   const postData = async (url, data) => {
     try {
       const response = await fetch(url, {
@@ -67,6 +50,23 @@ export default function SignIn() {
       console.error('There was a problem with the login request:', error);
       setErrorMessage('Wrong credentials. Please try again.');
     }
+  };
+
+  /**
+   * Handles form submission for user login.
+   *
+   * @param {Event} event - The form submission event.
+   */
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = {
+      username: formData.get('username'),
+      password: formData.get('password'),
+    };
+
+    // Post the data to the server.
+    postData('https://onedv613-restful-api.onrender.com/api/v1/login', data);
   };
 
   return (

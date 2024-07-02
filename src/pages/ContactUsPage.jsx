@@ -22,12 +22,12 @@ function ContactUsPage() {
   /**
    * Validates an email address.
    *
-   * @param {string} email - The email address to validate.
+   * @param {string} emailString - The email address to validate.
    * @returns {boolean} Whether the email is valid.
    */
-  const validateEmail = (email) => {
+  const validateEmail = (emailString) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
+    return re.test(emailString);
   };
 
   /**
@@ -71,8 +71,8 @@ function ContactUsPage() {
       setSuccess('Your message has been sent successfully.');
       setEmail('');
       setMessage('');
-    } catch (error) {
-      console.error('Error sending contact request:', error);
+    } catch (submitError) {
+      console.error('Error sending contact request:', submitError);
       setError('Failed to send message. Please try again.');
     }
   };
@@ -83,7 +83,8 @@ function ContactUsPage() {
         <Container maxWidth="sm">
           <H4Title text="Contact Us" />
           <Typography variant="body1" align="center" color="text.secondary" paragraph>
-            For any inquiries or appointments, please feel free to contact us using the information below:
+            For any inquiries or appointments, 
+            please feel free to contact us using the information below:
             <br />
             Email: info@healthplusclinic.com
             <br />
@@ -91,7 +92,8 @@ function ContactUsPage() {
             <br />
             Address: 123 Medical Boulevard, City, State, 12345
             <br />
-            Opening Hours: Monday-Friday: 8:00 AM - 6:00 PM, Saturday: 9:00 AM - 3:00 PM, Sunday: Closed
+            Opening Hours: Monday-Friday: 8:00 AM - 6:00 PM, 
+            Saturday: 9:00 AM - 3:00 PM, Sunday: Closed
           </Typography>
           {error && <Alert severity="error">{error}</Alert>}
           {success && <Alert severity="success">{success}</Alert>}

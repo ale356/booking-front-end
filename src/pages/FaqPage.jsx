@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -54,7 +55,8 @@ function FaqPage() {
         <Container maxWidth="sm">
           <H4Title text="FAQ" />
           <Typography variant="body1" align="center" color="text.secondary" paragraph>
-            Welcome to our FAQ page. Here you can find answers to some common questions about HealthPlus Clinic's medical services.
+            Welcome to our FAQ page. Here you can find answers to 
+            some common questions about HealthPlus Clinic's medical services.
           </Typography>
           <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
