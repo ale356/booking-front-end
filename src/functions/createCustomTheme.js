@@ -8,32 +8,30 @@
 import { createTheme } from '@mui/material/styles';
 import { blue, green, red } from '@mui/material/colors';
 
-const createCustomTheme = (severity, color) => {
-  return createTheme({
-    palette: {
-      primary: {
-        main: severity === 'primary' ? color : blue[500],
-        contrastText: '#ffffff',
-      },
-      secondary: {
-        main: severity === 'secondary' ? color : green[500],
-        contrastText: '#ffffff',
-      },
-      error: {
-        main: severity === 'error' ? color : red[500],
-        contrastText: '#ffffff',
-      },
+const createCustomTheme = (severity, color) => createTheme({
+  palette: {
+    primary: {
+      main: severity === 'primary' ? color : blue[500],
+      contrastText: '#ffffff',
     },
-    components: {
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            color: '#ffffff', // Ensure the text color is always white
-          },
+    secondary: {
+      main: severity === 'secondary' ? color : green[500],
+      contrastText: '#ffffff',
+    },
+    error: {
+      main: severity === 'error' ? color : red[500],
+      contrastText: '#ffffff',
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: '#ffffff', // Ensure the text color is always white
         },
       },
     },
-  });
-};
+  },
+});
 
 export default createCustomTheme;
