@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useContext, useState, useEffect } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';

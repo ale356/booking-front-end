@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable no-console */
 import React, { useContext } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
